@@ -1,0 +1,5 @@
+# virtual env
+venv
+
+# mac file
+.DS_Store
