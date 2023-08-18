@@ -6,26 +6,27 @@ import sys
 dir = sys.argv[1]
 
 # Create new folders for organizing
-new_folders = {'p':'pdf-files', 'w':'word-files', 'pn':'png-files', 'm':'misc'}
+new_folders = {'p':'pdf-files', 'w':'word-files', 'img':'image-files', 't':'text-files'}
 for key, folder in new_folders.items():
     f = os.path.join(dir, folder)
     if not os.path.exists(f):
         os.mkdir(f)
 
+# Move files
 for filename in os.listdir(dir):
     if filename.endswith('.pdf'):
         old_dir = os.path.join(dir, filename)
         new_dir = os.path.join(dir, new_folders['p'], filename)
         shutil.move(old_dir, new_dir)
-    elif filename.endswith('.docx'):
+    if filename.endswith('.docx') or filename.endswith('.doc'):
         old_dir = os.path.join(dir, filename)
         new_dir = os.path.join(dir, new_folders['w'], filename)
         shutil.move(old_dir, new_dir)
-    elif filename.endswith('.png'):
+    if filename.endswith('.txt'):
         old_dir = os.path.join(dir, filename)
-        new_dir = os.path.join(dir, new_folders['pn'], filename)
+        new_dir = os.path.join(dir, new_folders['t'], filename)
         shutil.move(old_dir, new_dir)
-    else:
+    if filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.jpeg'):
         old_dir = os.path.join(dir, filename)
-        new_dir = os.path.join(dir, new_folders['m'], filename)
+        new_dir = os.path.join(dir, new_folders['img'], filename)
         shutil.move(old_dir, new_dir)
